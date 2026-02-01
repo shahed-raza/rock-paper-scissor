@@ -11,22 +11,43 @@ function playGame() {
     let roundWinner = '';
     let humanScore = 0, computerScore = 0;
     for (let i = 1; i <= numOfRounds; i++) {
+        console.log(`Round ${i}: Ready?`);
+        alert(`Round ${i}: Ready?`);
+
         humanChoice = getHumanChoice();
         computerChoice = getComputerChoice();
+
+        console.log(`You Chose ${humanChoice.toUpperCase()}\nComputer Chose ${computerChoice.toUpperCase()}`);
+
         roundWinner = playRound(humanChoice, computerChoice);
+
         /* update scores */
         if (roundWinner === 'human') {
             humanScore += 1;
+            console.log(`You Win! ${humanChoice.toUpperCase()} beats ${computerChoice.toUpperCase()}`);
+            let message1 = `You Chose ${humanChoice.toUpperCase()}\nComputer Chose ${computerChoice.toUpperCase()}\n`;
+            let message2 = `You Win! ${humanChoice.toUpperCase()} beats ${computerChoice.toUpperCase()}\n`;
+            let message3 = `Round ${i}:\nYour Score: ${humanScore}\nComputer Score: ${computerScore}\n`;
+            alert(`${message1}\n${message2}\n${message3}`);
         }
         else if (roundWinner === 'computer') {
             computerScore += 1;
+            console.log(`You Lose! ${computerChoice.toUpperCase()} beats ${humanChoice.toUpperCase()}`);
+            let message1 = `You Chose ${humanChoice.toUpperCase()}\nComputer Chose ${computerChoice.toUpperCase()}\n`;
+            let message2 = `You Lose! ${computerChoice.toUpperCase()} beats ${humanChoice.toUpperCase()}\n`;
+            let message3 = `Round ${i}:\nYour Score: ${humanScore}\nComputer Score: ${computerScore}\n`;
+            alert(`${message1}\n${message2}\n${message3}`);
         }
         else if (roundWinner === '') {
             humanScore += 1;
             computerScore += 1;
+            console.log(`Tie! since, both chose ${humanChoice.toUpperCase()}`);
+            let message1 = `You Chose ${humanChoice.toUpperCase()}\nComputer Chose ${computerChoice.toUpperCase()}\n`;
+            let message2 = `Tie! since, both chose ${humanChoice.toUpperCase()}\n`;
+            let message3 = `Round ${i}:\nYour Score: ${humanScore}\nComputer Score: ${computerScore}\n`;
+            alert(`${message1}\n${message2}\n${message3}`);
         }
         console.log(`Round ${i}:\nYour Score: ${humanScore}\nComputer Score: ${computerScore}\n`);
-        alert(`Round ${i}:\nYour Score: ${humanScore}\nComputer Score: ${computerScore}\n`);
     }
     /* overall winner announcement */
     if (humanScore > computerScore) {
@@ -44,13 +65,10 @@ function playGame() {
 }
 
 function playRound(humanChoice, computerChoice) {
+
     
-    console.log(`You Chose ${humanChoice.toUpperCase()}\nComputer Chose ${computerChoice.toUpperCase()}`);
-    alert(`You Chose ${humanChoice.toUpperCase()}\nComputer Chose ${computerChoice.toUpperCase()}`);
 
     if (humanChoice === computerChoice) {
-        console.log(`Tie! since, both chose ${humanChoice.toUpperCase()}`);
-        alert(`Tie! since, both chose ${humanChoice.toUpperCase()}`);
         return '';
     }
 
@@ -73,15 +91,6 @@ function playRound(humanChoice, computerChoice) {
     else if (humanChoice === 'rock' && computerChoice === 'scissor') {
         winner = 'human';
     }
-    
-    if (winner === 'human') {
-        console.log(`You Win! ${humanChoice.toUpperCase()} beats ${computerChoice.toUpperCase()}`);
-        alert(`You Win! ${humanChoice.toUpperCase()} beats ${computerChoice.toUpperCase()}`);
-    }
-    else {
-        console.log(`You Lose! ${computerChoice.toUpperCase()} beats ${humanChoice.toUpperCase()}`);
-        alert(`You Lose! ${computerChoice.toUpperCase()} beats ${humanChoice.toUpperCase()}`);
-    }
 
     return winner;
 }
@@ -91,7 +100,7 @@ function getHumanChoice() {
     let userInput = '';
     let invalidInput = true;
     do {
-        userInput = prompt('Rock or Paper or Scissor: ');
+        userInput = prompt('Enter Rock or Paper or Scissor: ');
         userInput = userInput.toLowerCase();
         invalidInput = (userInput !== 'rock' && userInput !== 'paper' && userInput !== 'scissor');
         if (invalidInput) {
